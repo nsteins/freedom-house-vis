@@ -10,12 +10,18 @@ from bokeh.layouts import column,row,widgetbox
 from bokeh.palettes import Dark2
 
 ##Load Data
-df = pd.read_csv('data/2016_2015_Master_Data.csv')
-
+df = pd.read_csv('data/2006_2015_Master_Data2.csv')
+df = df.replace('#REF!',np.nan)
 ##Load Column Names
-column_names = pd.read_csv('data/Variable_Descriptors.csv')
-column_names = column_names.ix[0:23]
+column_names = pd.read_csv('data/FH_Col_Names_Desc.csv')
 column_names = dict(zip(column_names['Descriptors'].values,column_names['FullNames'].values))
+
+cl = column_names.keys()
+drops = ['Year','Country','Region','Status']
+cl_clean = list([col for col in cl if col not in drops])
+
+for col in cl_clean:
+    df[column_names[col]] = df[column_names[col]].convert_objects(convert_numeric=True)
 
 def plot_scatter():
     MAX_SIZE = 20
@@ -24,7 +30,7 @@ def plot_scatter():
     x_val = column_names[x_column.value]
     y_val = column_names[y_column.value]
     z_val = column_names[size_column.value]
-
+    print (x_val,y_val,z_val)
     df_filter = df[df['Year']==float(year_column.value)]
     df_filter = df_filter[df_filter['Region'].isin(region_column.value)]
     df_filter = df_filter[np.isfinite(df_filter[x_val]) & np.isfinite(df_filter[y_val]) & np.isfinite(df_filter[z_val])]
@@ -60,6 +66,8 @@ def plot_scatter():
     ]
 
     p = figure(plot_width=900, plot_height=600,tools=[hover])
+    p.xaxis.axis_label = x_column.value
+    p.yaxis.axis_label = y_column.value
 
     p.circle('x', 'y', size='size', fill_color='color', line_color='black',
              source=source)
@@ -71,8 +79,7 @@ def update(attr, old, new):
 
 
 ##Create Sliders
-columns = ['Political Rights Aggregated Score','Total Aggregated Score','Civil Liberties Aggregated Score',
-           'Fragile States Index Uneven Economic Development','Fragile States Index Demographic Pressures']
+columns = cl_clean
 years = list(df['Year'].unique().astype(str))
 regions = list(df['Region'].unique())
 
@@ -92,7 +99,7 @@ year_column.on_change('value', update)
 region_column = MultiSelect(title='Regions', value=regions[:], options=regions)
 region_column.on_change('value',update)
 
-controls = widgetbox([x_column, y_column, size_column, year_column, region_column], width=400)
+controls = widgetbox([x_column, y_column, size_column, year_column, region_column], width=550)
 layout = row(controls, plot_scatter())
 
 curdoc().add_root(layout)
