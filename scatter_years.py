@@ -20,6 +20,10 @@ cl = column_names.keys()
 drops = ['Year','Country','Region','Status']
 cl_clean = list([col for col in cl if col not in drops])
 
+#Create region codes for coloring
+df['Region_code'] = df['Region'].astype('category').cat.codes
+color_pallette = np.array(Dark2[len(df['Region'].unique())])
+
 for col in cl_clean:
     df[column_names[col]] = df[column_names[col]].convert_objects(convert_numeric=True)
 
@@ -30,7 +34,7 @@ def plot_scatter():
     x_val = column_names[x_column.value]
     y_val = column_names[y_column.value]
     z_val = column_names[size_column.value]
-    print (x_val,y_val,z_val)
+
     df_filter = df[df['Year']==float(year_column.value)]
     df_filter = df_filter[df_filter['Region'].isin(region_column.value)]
     df_filter = df_filter[np.isfinite(df_filter[x_val]) & np.isfinite(df_filter[y_val]) & np.isfinite(df_filter[z_val])]
@@ -41,9 +45,7 @@ def plot_scatter():
     size = (z-np.min(z))/(np.max(z)-np.min(z))
     countries = list(df_filter['Country'].values)
     
-    regions = df_filter['Region']
-    color_pallette = np.array(Dark2[len(df['Region'].unique())])
-    color_index = regions.astype('category').cat.codes.values
+    color_index = df_filter['Region_code'] 
 
     source = ColumnDataSource(
         data=dict(
