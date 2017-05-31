@@ -3,14 +3,15 @@ from __future__ import division
 import numpy as np
 import pandas as pd
 from bokeh.plotting import figure, curdoc
-from bokeh.models.widgets import Select, MultiSelect
+from bokeh.models.widgets import Select, CheckboxGroup, Button
 from bokeh.models import Button, Slider, HoverTool, ColumnDataSource
 from bokeh.layouts import column,row,widgetbox,layout
 from bokeh.palettes import Dark2
 
 def make_data_dict(x_val,y_val,z_val,year):
     df_filter = df[df['Year']==year]
-    df_filter = df_filter[df_filter['Region'].isin(region_column.value)]
+    df_filter = df_filter[df_filter['Region'].isin(
+                list(regions[i] for i in region_column.active))]
     df_filter = df_filter[np.isfinite(df_filter[x_val]) & np.isfinite(df_filter[y_val]) & np.isfinite(df_filter[z_val])]
 
     x = df_filter[x_val].values
@@ -20,11 +21,15 @@ def make_data_dict(x_val,y_val,z_val,year):
     MAX_SIZE = 30
     MIN_SIZE = 10
     
-    if z!= []:
+    if z_val =='constant':
+        size = z*(MIN_SIZE + MAX_SIZE)/2
+    elif z!= []:
         size = (z-np.min(z))/(np.max(z)-np.min(z))
         size = MAX_SIZE*size+MIN_SIZE
     else:
         size = []
+
+        
 
     countries = list(df_filter['Country'].values)    
     color_index = df_filter['Region_code'] 
@@ -33,6 +38,7 @@ def make_data_dict(x_val,y_val,z_val,year):
                 x=x,
                 y=y,
                 z=z,
+                FH = df_filter['Total.Aggr'],
                 x_label = [x_column.value]*len(x),
                 y_label = [y_column.value]*len(x),
                 z_label = [size_column.value]*len(x),
@@ -40,6 +46,7 @@ def make_data_dict(x_val,y_val,z_val,year):
                 size = size,
                 color = color_pallette[color_index]
                 )
+
     return data
     
 def make_plot():
@@ -47,7 +54,8 @@ def make_plot():
     y_val = column_names[y_column.value]
     z_val = column_names[size_column.value] 
     
-    df_filter = df[df['Region'].isin(region_column.value)]
+    df_filter = df[df['Region'].isin(
+                    list(regions[i] for i in region_column.active))]
     df_filter = df_filter[np.isfinite(df_filter[x_val]) & np.isfinite(df_filter[y_val]) & np.isfinite(df_filter[z_val])]
     years = list(df_filter['Year'].unique())
     
@@ -61,11 +69,14 @@ def make_plot():
     hover = HoverTool()
     hover.tooltips = [
         ("Country", "@label"),
+        ("FH Score","@FH"),
         (x_column.value, "@x"),
         (y_column.value,"@y"),
-        (size_column.value,"@z")
     ]
     
+    if z_val != 'constant':
+        hover.tooltips.append((size_column.value,"@z"))
+
     p = figure(width=800,height=700,tools=[hover,'tap'])
     
     p.xaxis.axis_label = x_column.value
@@ -116,7 +127,13 @@ def animate():
         button.label = '► Play'
         curdoc().remove_periodic_callback(animate_update)
         
-        
+def reset():
+    x_column.value = x_col_init
+    y_column.value = y_col_init
+    size_column.value = 'constant'
+    region_column.active = range(len(regions))
+    slider.value = years[0]
+       
 ##Load Data
 df = pd.read_csv('data/2006_2015_Master_Data2.csv')
 df = df.replace('#REF!',np.nan)
@@ -140,9 +157,11 @@ color_pallette = np.array(Dark2[len(df['Region'].unique())])
 for col in cl_clean:
     df[column_names[col]] = pd.to_numeric(df[column_names[col]],errors='coerce')
 
+#add constant column for constant bubble size option
+df['constant'] = 1
+column_names['constant'] = 'constant'
 x_col_init = columns[1]
 y_col_init = columns[5]
-z_col_init = columns[4]
 
 ##Create Widgets
 button = Button(label='► Play', width=60)
@@ -154,14 +173,18 @@ x_column.on_change('value', update_columns)
 y_column = Select(title='Y-Axis', value=y_col_init, options=columns)
 y_column.on_change('value', update_columns)
 
-size_column = Select(title='Size', value=z_col_init, options=columns)
+size_column = Select(title='Size', value='constant', 
+                        options=['constant'] + columns)
 size_column.on_change('value', update_columns)
 
 slider = Slider(start=years[0], end=years[-1], value=years[0], step=1, title="Year")
 slider.on_change('value', update_year)
 
-region_column = MultiSelect(title='Regions', value=regions[:], options=regions)
-region_column.on_change('value',update_columns)
+region_column = CheckboxGroup(labels=regions[:],active = range(len(regions)))
+region_column.on_change('active',update_columns)
+
+reset_button = Button(label = 'Reset')
+reset_button.on_click(reset)
 
 #Create initial plot
 p, plot_source = make_plot()
