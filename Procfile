@@ -1,1 +1,1 @@
-web: bokeh serve --num-procs=0 --host=fh-vis.herokuapp.com --address=0.0.0.0 --log-level=debug --port=$PORT --use-xheaders scatter_animated.py
+web: bokeh serve --port=$PORT --num-procs=0 --host=fh-vis.herokuapp.com --address=0.0.0.0 --use-xheaders scatter_animated.py
