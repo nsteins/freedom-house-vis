@@ -1,3 +1,8 @@
 numpy==1.11.3
 pandas==0.19.2
 bokeh==0.12.4
+Jinja2==2.9.5
+MarkupSafe==0.23
+PyYAML==3.12
+requests==2.13.0
+tornado==4.4.2
