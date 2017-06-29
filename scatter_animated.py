@@ -2,8 +2,9 @@ from __future__ import division
 
 import numpy as np
 import pandas as pd
+from scipy.stats import linregress
 from bokeh.plotting import figure, curdoc
-from bokeh.models.widgets import Select, CheckboxGroup, Button
+from bokeh.models.widgets import Select, CheckboxGroup, Button, Div
 from bokeh.models import Button, Slider, HoverTool, ColumnDataSource
 from bokeh.layouts import column,row,widgetbox,layout
 from bokeh.palettes import Dark2
@@ -44,10 +45,31 @@ def make_data_dict(x_val,y_val,z_val,year):
                 z_label = [size_column.value]*len(x),
                 label=countries,
                 size = size,
-                color = color_pallette[color_index]
+                color = color_pallette[color_index])
+    return data
+                
+def make_stats_dict(p,data):
+    #add stats analysis of x & y variables
+    x, y = [data['x'],data['y']]
+    slope, intercept, r_value, p_value, std_err = linregress(x, y)
+    x_med = np.median(x)
+    y_med = np.median(y)
+    
+    x_s, x_e = [p.x_range.start,p.x_range.end]
+    y_s = x_s*slope + intercept
+    y_e = x_e*slope + intercept
+
+    stats = dict(
+                x_range = [x_s,x_e],
+                y_range = [p.y_range.start,p.y_range.end],
+                line_y = [y_s,y_e],
+                slope = [slope]*2,
+                R_2 = [r_value**2]*2,
+                x_med = [x_med]*2,
+                y_med = [y_med]*2
                 )
 
-    return data
+    return stats
     
 def make_plot():
     x_val = column_names[x_column.value]
@@ -64,15 +86,12 @@ def make_plot():
     if slider.value not in years:
         slider.value = years[1]
     
-    source = ColumnDataSource(data=make_data_dict(x_val,y_val,z_val,slider.value))
-
-    hover = HoverTool()
-    hover.tooltips = [
+    hover = HoverTool(tooltips = [
         ("Country", "@label"),
         ("FH Score","@FH"),
         (x_column.value, "@x"),
         (y_column.value,"@y"),
-    ]
+        ])
     
     if z_val != 'constant':
         hover.tooltips.append((size_column.value,"@z"))
@@ -89,17 +108,40 @@ def make_plot():
     p.y_range.start = df[y_val].min() - y_pad
     p.x_range.end = df[x_val].max() + x_pad
     p.y_range.end = df[y_val].max() + y_pad
-
-
-    p.circle('x', 'y', size='size', fill_color='color', line_color='black',
-         source=source)
-         
-    return p,source
     
+    source = ColumnDataSource(data=make_data_dict(x_val,y_val,z_val,slider.value))
+    stats = ColumnDataSource(data = make_stats_dict(p,source.data))
+
+    scatter = p.circle('x', 'y', size='size', fill_color='color', fill_alpha=0.5,
+                        line_color='black',source=source)
+
+    hover.renderers.append(scatter)
+    
+    
+    #add stats info to plot
+    p.line('x_range','line_y',source=stats,line_dash='dashed',line_color='red')
+    p.line('x_range','y_med',source=stats,line_dash = 'dotted',line_color='black',
+            line_alpha=0.7)
+    p.line('x_med','y_range',source=stats,line_dash = 'dotted',line_color='black',
+            line_alpha=0.7)
+
+         
+    return p,source,stats
+
+def update_stats_box(stats):
+    s = stats.data
+    stats_text = ''.join(["<b>X-axis median</b>: %.2f</br>" % (s['x_med'][0]),
+                "<b>Y-axis median</b>: %.2f</br>" % (s['y_med'][0]),
+                "<b>Linear regression slope</b>: %.2f</br>" % (s['slope'][0]),
+                "<b>R<sup>2</sup></b>: %.2f"  % (s['R_2'][0])
+                ])
+    return stats_text
+
 def update_columns(attr, old, new):
-    global plot_source    
-    p, plot_source = make_plot()
+    global plot_source,stats    
+    p, plot_source,stats = make_plot()
     lout.children[0] = p
+    stats_box.text = update_stats_box(stats)
 
 def update_year(attr, old, new):
     x_val = column_names[x_column.value]
@@ -107,7 +149,8 @@ def update_year(attr, old, new):
     z_val = column_names[size_column.value]
     
     plot_source.data.update(make_data_dict(x_val,y_val,z_val,slider.value))
-    
+    stats.data.update(make_stats_dict(lout.children[0],plot_source.data))
+    stats_box.text = update_stats_box(stats)
 
 def animate_update():
     year = slider.value + 1
@@ -187,12 +230,12 @@ reset_button = Button(label = 'Reset')
 reset_button.on_click(reset)
 
 #Create initial plot
-p, plot_source = make_plot()
+p, plot_source, stats = make_plot()
 
-controls = widgetbox([x_column, y_column, size_column, region_column,slider,button],width=430)
-#top_row = row([controls, p],sizing_mode='scale_width')
-#bottom_row = row([slider,button],sizing_mode='scale_both')
-#lout = column([top_row,bottom_row],sizing_mode='fixed')
+stats_box = Div(text = update_stats_box(stats))
+
+controls = widgetbox([x_column, y_column, size_column, 
+                      region_column,slider,button,stats_box],width=430)
 lout = row([p,controls])
 curdoc().add_root(lout)
 curdoc().title = "FH Scatterplot" 
