@@ -136,12 +136,27 @@ def update_stats_box(stats):
                 "<b>R<sup>2</sup></b>: %.2f"  % (s['R_2'][0])
                 ])
     return stats_text
+    
+def update_desc_box():
+    x = column_names_df[column_names_df['Descriptors'] == x_column.value]
+    y = column_names_df[column_names_df['Descriptors'] == y_column.value]
+    z = column_names_df[column_names_df['Descriptors'] == size_column.value]
+    desc_text = ''.join(["<b><a href=%s>%s</a></b>: %s</br>" % (x['Link'].iloc[0],x['Descriptors'].iloc[0],
+                                                                x['Score Description'].iloc[0]),
+                "<b><a href=%s>%s</a></b>: %s</br>" % (y['Link'].iloc[0],y['Descriptors'].iloc[0],
+                                                                y['Score Description'].iloc[0]),
+                ])
+    if not z.empty:
+        desc_text +=  "<b><a href=%s>%s</a></b>: %s</br>" % (z['Link'].iloc[0],z['Descriptors'].iloc[0],
+                                                                z['Score Description'].iloc[0])
+    return desc_text
 
 def update_columns(attr, old, new):
     global plot_source,stats    
     p, plot_source,stats = make_plot()
     lout.children[0] = p
     stats_box.text = update_stats_box(stats)
+    desc_box.text = update_desc_box()
 
 def update_year(attr, old, new):
     x_val = column_names[x_column.value]
@@ -151,6 +166,7 @@ def update_year(attr, old, new):
     plot_source.data.update(make_data_dict(x_val,y_val,z_val,slider.value))
     stats.data.update(make_stats_dict(lout.children[0],plot_source.data))
     stats_box.text = update_stats_box(stats)
+    desc_box.text = update_desc_box()
 
 def animate_update():
     year = slider.value + 1
@@ -181,8 +197,8 @@ def reset():
 df = pd.read_csv('data/2006_2015_Master_Data2.csv')
 df = df.replace('#REF!',np.nan)
 ##Load Column Names
-column_names = pd.read_csv('data/FH_Col_Names_Desc.csv')
-column_names = dict(zip(column_names['Descriptors'].values,column_names['FullNames'].values))
+column_names_df = pd.read_csv('data/FH_Col_Names_Desc.csv')
+column_names = dict(zip(column_names_df['Descriptors'].values,column_names_df['FullNames'].values))
 
 cl = column_names.keys()
 drops = ['Year','Country','Region','Status']
@@ -233,9 +249,11 @@ reset_button.on_click(reset)
 p, plot_source, stats = make_plot()
 
 stats_box = Div(text = update_stats_box(stats))
+desc_box = Div(text = update_desc_box())
 
 controls = widgetbox([x_column, y_column, size_column, 
-                      region_column,slider,button,stats_box],width=430)
+                      region_column,slider,button,stats_box,
+                      desc_box],width=430)
 lout = row([p,controls])
 curdoc().add_root(lout)
 curdoc().title = "FH Scatterplot" 
