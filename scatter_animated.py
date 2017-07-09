@@ -8,6 +8,7 @@ from bokeh.models.widgets import Select, CheckboxGroup, Button, Div
 from bokeh.models import Button, Slider, HoverTool, ColumnDataSource
 from bokeh.layouts import column,row,widgetbox,layout
 from bokeh.palettes import Dark2
+from bokeh.embed import autoload_server
 
 def make_data_dict(x_val,y_val,z_val,year):
     df_filter = df[df['Year']==year]
@@ -257,3 +258,7 @@ controls = widgetbox([x_column, y_column, size_column,
 lout = row([p,controls])
 curdoc().add_root(lout)
 curdoc().title = "FH Scatterplot" 
+
+with open('scatter_animated_embed.html','w') as f:
+    script = autoload_server(url = "https://fh-vis.herokuapp.com/scatter_animated")
+    f.write(script)
