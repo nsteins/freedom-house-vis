@@ -305,13 +305,12 @@ region_column.on_change('active',update_columns)
 reset_button = Button(label = 'Reset')
 reset_button.on_click(reset)
 
-
-stats_box = Div(text = update_stats_box(stats))
-desc_box = Div(text = update_desc_box())
-
-
 #Create initial plot
 p, plot_source, stats = make_plot()
+
+#Create description boxes
+stats_box = Div(text = update_stats_box(stats))
+desc_box = Div(text = update_desc_box())
 
 #Add Plot and Widgets to document layout
 controls = widgetbox([x_column, y_column, size_column, 
