@@ -13,6 +13,8 @@ def make_data_dict(y_val,z_val,year_range):
     df_filter = df[df['Year'].between(year_range[0],year_range[1])]
     df_filter = df_filter[df_filter['Region'].isin(
                 list(regions[i] for i in region_column.active))]
+    df_filter = df_filter[df_filter['Country'].isin(
+                list(countries[i] for i in country_column.active))]
     df_filter = df_filter[np.isfinite(df_filter[y_val]) & np.isfinite(df_filter[z_val])]
 
     x = df_filter['Year'].values
@@ -32,7 +34,7 @@ def make_data_dict(y_val,z_val,year_range):
 
         
 
-    countries = list(df_filter['Country'].values)    
+    country_list = list(df_filter['Country'].values)    
     color_index = df_filter['Region_code'] 
 
     data = dict(
@@ -43,7 +45,7 @@ def make_data_dict(y_val,z_val,year_range):
                 x_label = ['Year']*len(x),
                 y_label = [y_column.value]*len(x),
                 z_label = [size_column.value]*len(x),
-                label=countries,
+                label=country_list,
                 size = size,
                 color = color_pallette[color_index])
    
@@ -77,7 +79,6 @@ def make_plot():
         slider.range = (slider.range[0],years[-1])
     
     year_range = slider.range    
-    print(slider.range)
     hover = HoverTool(tooltips = [
         ("Country", "@label"),
         ("FH Score","@FH"),
@@ -171,6 +172,7 @@ cl_clean = list([col for col in cl_clean if column_names[col] in df.columns])
 columns = sorted(cl_clean)
 years = list(df['Year'].unique())
 regions = list(df['Region'].unique())
+countries = list(df['Country'].unique())
 
 #Create region codes for coloring
 df['Region_code'] = df['Region'].astype('category').cat.codes
@@ -200,6 +202,10 @@ slider.on_change('range', update_year)
 region_column = CheckboxGroup(labels=regions[:],active = range(len(regions)))
 region_column.on_change('active',update_columns)
 
+country_column = CheckboxGroup(labels=countries[:],active = range(10))
+country_column.on_change('active',update_columns)
+
+
 reset_button = Button(label = 'Reset')
 reset_button.on_click(reset)
 
@@ -208,7 +214,7 @@ p, sc_source, line_source = make_plot()
 
 desc_box = Div(text = update_desc_box())
 
-controls = widgetbox([y_column, size_column,region_column,
+controls = widgetbox([y_column, size_column,country_column,
                       slider,reset_button,desc_box],width=430)
 lout = row([p,controls])
 curdoc().add_root(lout)
