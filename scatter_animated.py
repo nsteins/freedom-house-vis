@@ -258,6 +258,11 @@ df = df.replace('#REF!',np.nan)
 column_names_df = pd.read_csv('data/FH_Col_Names_Desc.csv')
 column_names = dict(zip(column_names_df['Descriptors'].values,column_names_df['FullNames'].values))
 
+##turn WB zeros with nan
+WB_columns = column_names_df.loc[column_names_df['Data Source']=='The World Bank',
+                    'FullNames'].values
+df[WB_columns] = df[WB_columns].where(df[WB_columns]!='0',np.nan)
+
 cl = column_names.keys()
 drops = ['Year','Country','Region','Status']
 cl_clean = list([col for col in cl if col not in drops])
