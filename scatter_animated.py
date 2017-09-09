@@ -1,11 +1,13 @@
 from __future__ import division
 
+from os.path import dirname, join
+
 import numpy as np
 import pandas as pd
 from scipy.stats import linregress
 from bokeh.plotting import figure, curdoc
 from bokeh.models.widgets import Select, CheckboxGroup,  Div
-from bokeh.models import Button, Slider, HoverTool, ColumnDataSource
+from bokeh.models import Button, Slider, HoverTool, ColumnDataSource, CustomJS
 from bokeh.layouts import row,widgetbox
 from bokeh.palettes import Dark2
 from bokeh.embed import autoload_server
@@ -253,6 +255,8 @@ def reset():
 ##Load Data
 df = pd.read_csv('data/2006_2015_Master_Data2.csv')
 df = df.replace('#REF!',np.nan)
+# For download button
+download_CDS = ColumnDataSource(df)
 
 ##Load Column Names
 column_names_df = pd.read_csv('data/FH_Col_Names_Desc.csv')
@@ -310,6 +314,10 @@ region_column.on_change('active',update_columns)
 reset_button = Button(label = 'Reset')
 reset_button.on_click(reset)
 
+download_button = Button(label = 'Download', button_type="success")
+download_button.callback = CustomJS(args=dict(source=download_CDS),
+                                    code=open(join(dirname(__file__), "download.js")).read())
+
 #Create initial plot
 p, plot_source, stats = make_plot()
 
@@ -319,7 +327,7 @@ desc_box = Div(text = update_desc_box())
 
 #Add Plot and Widgets to document layout
 controls = widgetbox([x_column, y_column, size_column, 
-                      region_column,slider,button,reset_button
+                      region_column,slider,button,reset_button,download_button
                       ,stats_box,desc_box],width=430)
 lout = row([p,controls])
 curdoc().add_root(lout)
