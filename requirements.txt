@@ -7,4 +7,4 @@ PyYAML==3.12
 requests==2.13.0
 tornado==4.4.2
 scipy
-PIL
+pil
