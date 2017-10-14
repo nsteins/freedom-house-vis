@@ -1,28 +1,29 @@
-from __future__ import division
-
+# -*- coding: utf-8 -*-
 from os.path import dirname, join
 
 import numpy as np
 import pandas as pd
+import PIL.Image
 from scipy.stats import linregress
 from bokeh.plotting import figure, curdoc
 from bokeh.models.widgets import Select, CheckboxGroup,  Div
-from bokeh.models import Button, Slider, HoverTool, ColumnDataSource, CustomJS
-from bokeh.layouts import row,widgetbox
+from bokeh.models import Button, Slider, HoverTool, ColumnDataSource, CustomJS, OpenURL, TapTool
+from bokeh.layouts import row,column,widgetbox
 from bokeh.palettes import Dark2
 from bokeh.embed import autoload_server
 
-#This function will create a dictionary of the scatterplot data to be used as
-#the source for the scatter plot. The dictionary contains both the data and the 
-#information necessary for the hover tool labels.
-#
-#INPUTS: x_val - column name of the variable to be used on the x-axis
-#y_val - column name of the variable to be used on the y-axis
-#z_val - column name of the variable to be used for the point size
-#year - The year to use data from
-#
-#RETURNS: data - dictionary containing data used for the scatter plot and hover
+
 def make_data_dict(x_val,y_val,z_val,year):
+    #This function will create a dictionary of the scatterplot data to be used as
+    #the source for the scatter plot. The dictionary contains both the data and the 
+    #information necessary for the hover tool labels.
+    #
+    #INPUTS: x_val - column name of the variable to be used on the x-axis
+    #y_val - column name of the variable to be used on the y-axis
+    #z_val - column name of the variable to be used for the point size
+    #year - The year to use data from
+    #
+    #RETURNS: data - dictionary containing data used for the scatter plot and hover
     df_filter = df[df['Year']==year]
     df_filter = df_filter[df_filter['Region'].isin(
                 list(regions[i] for i in region_column.active))]
@@ -94,14 +95,15 @@ def make_stats_dict(p,data):
 
     return stats
 
-#This function creates the scatter plot for the application.
-#make_plot does not take any inputs, but checks the state of the control widgets
-#in order to determine which values to plot.
-#
-#RETURNS: p -  the bokeh figure object containing the plot
-#source - the bokeh ColumnDataSource containing the scatter plot data
-#stats - the bokeh ColumnDataSource containing the stats data  
 def make_plot():
+    #This function creates the scatter plot for the application.
+    #make_plot does not take any inputs, but checks the state of the control widgets
+    #in order to determine which values to plot.
+    #
+    #RETURNS: p -  the bokeh figure object containing the plot
+    #source - the bokeh ColumnDataSource containing the scatter plot data
+    #stats - the bokeh ColumnDataSource containing the stats data 
+
     x_val = column_names[x_column.value]
     y_val = column_names[y_column.value]
     z_val = column_names[size_column.value] 
@@ -203,7 +205,7 @@ def update_desc_box():
 def update_columns(attr, old, new):
     global plot_source,stats    
     p, plot_source,stats = make_plot()
-    lout.children[0] = p
+    chart_layout.children[0] = p
     stats_box.text = update_stats_box(stats)
     desc_box.text = update_desc_box()
 
@@ -217,7 +219,7 @@ def update_year(attr, old, new):
     z_val = column_names[size_column.value]
     
     plot_source.data.update(make_data_dict(x_val,y_val,z_val,slider.value))
-    stats.data.update(make_stats_dict(lout.children[0],plot_source.data))
+    stats.data.update(make_stats_dict(chart_layout.children[0],plot_source.data))
     stats_box.text = update_stats_box(stats)
     desc_box.text = update_desc_box()
 
@@ -252,6 +254,32 @@ def reset():
     region_column.active = range(len(regions))
     slider.value = years[0]
        
+def load_image(image_file,url, width_pixel, height_pixel):
+    #This function reads image files using Bokeh library and returns a figure object to be embedded in the layout object
+    dk_img = PIL.Image.open(image_file)
+    # width_pixel,height_pixel = 600, 70
+    size_new = (width_pixel,height_pixel)
+    dk_img = dk_img.resize(size_new).convert('RGBA')
+    a = np.array(dk_img)
+    dk_array = a.view(dtype=np.uint32).reshape(a.shape[:-1])
+    dk_array = dk_array[::-1]
+    plot = figure(x_range=(1, width_pixel), y_range=(height_pixel,1 ), plot_height=height_pixel, plot_width= width_pixel)
+    plot.image_rgba(image=[dk_array], x=0, y=height_pixel, dw=width_pixel, dh=height_pixel)
+    plot.toolbar.logo=None
+    plot.toolbar_location=None
+    plot.xaxis.visible = False
+    plot.yaxis.visible = False
+    plot.xaxis.major_tick_line_color = None  # turn off x-axis major ticks
+    plot.xaxis.minor_tick_line_color = None  # turn off x-axis minor ticks
+    plot.yaxis.major_tick_line_color = None  # turn off y-axis major ticks
+    plot.yaxis.minor_tick_line_color = None
+    plot.xgrid.grid_line_color = None
+    plot.ygrid.grid_line_color = None
+    plot.outline_line_alpha = None
+    taptool = p.select(type=TapTool)
+    taptool.callback = OpenURL(url=url)
+    return plot
+
 ##Load Data
 df = pd.read_csv('data/2006_2015_Master_Data2.csv')
 df = df.replace('#REF!',np.nan)
@@ -269,6 +297,8 @@ df[WB_columns] = df[WB_columns].where(df[WB_columns]!='0',np.nan)
 
 cl = column_names.keys()
 drops = ['Year','Country','Region','Status']
+#temporarily remove below two columns because of error
+drops = drops + ['WB - Labor force participation rate', 'WB - Labor force participation rate for ages 15-24']
 cl_clean = list([col for col in cl if col not in drops])
 cl_clean = list([col for col in cl_clean if column_names[col] in df.columns])
 
@@ -325,13 +355,21 @@ p, plot_source, stats = make_plot()
 stats_box = Div(text = update_stats_box(stats))
 desc_box = Div(text = update_desc_box())
 
+#Create logo images
+
+datakind_logo = load_image('static/png;base643d4f2e4c644d5b29.png','http://www.datakind.org/',600,70)
+freedomhouse_logo = load_image('static/FH_logo_blue_large_PNG.png','https://freedomhouse.org/',150,70)
+
 #Add Plot and Widgets to document layout
 controls = widgetbox([x_column, y_column, size_column, 
                       region_column,slider,button,reset_button,download_button
                       ,stats_box,desc_box],width=430)
-lout = row([p,controls])
+logo_layout = row([datakind_logo,freedomhouse_logo])
+chart_layout = row([p,controls])
+lout = column(logo_layout,chart_layout)
 curdoc().add_root(lout)
 curdoc().title = "FH Scatterplot" 
+
 
 #Export script for embedding plot in other pages
 with open('scatter_animated_embed.html','w') as f:

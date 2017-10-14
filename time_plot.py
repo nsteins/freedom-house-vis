@@ -9,6 +9,7 @@ from bokeh.layouts import row,widgetbox
 from bokeh.palettes import Dark2
 from bokeh.embed import autoload_server
 
+
 def make_data_dict(y_val,z_val,year_range):
     df_filter = df[df['Year'].between(year_range[0],year_range[1])]
     df_filter = df_filter[df_filter['Region'].isin(
@@ -218,9 +219,5 @@ controls = widgetbox([y_column, size_column,country_column,
                       slider,reset_button,desc_box],width=430)
 lout = row([p,controls])
 curdoc().add_root(lout)
-curdoc().title = "FH Scatterplot" 
-
-with open('time_plot_embed.html','w') as f:
-    script = autoload_server(url = "https://fh-vis.herokuapp.com/time_plot")
-    f.write(script)
+curdoc().title = "FH Time Plot" 
 
