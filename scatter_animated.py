@@ -299,7 +299,7 @@ df[WB_columns] = df[WB_columns].where(df[WB_columns]!='0',np.nan)
 cl = column_names.keys()
 drops = ['Year','Country','Region','Status']
 #temporarily remove below two columns because of error
-drops = drops + ['WB - Labor force participation rate', 'WB - Labor force participation rate for ages 15-24']
+# drops = drops + ['WB - Labor force participation rate', 'WB - Labor force participation rate for ages 15-24']
 cl_clean = list([col for col in cl if col not in drops])
 cl_clean = list([col for col in cl_clean if column_names[col] in df.columns])
 
