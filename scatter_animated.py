@@ -114,9 +114,10 @@ def make_plot():
     df_filter = df_filter[np.isfinite(df_filter[x_val]) & np.isfinite(df_filter[y_val]) & np.isfinite(df_filter[z_val])]
     
     #Adjust the slider so it only points to years where the data is valid
-    years = list(df_filter['Year'].unique())
+    years = sorted(list(df_filter['Year'].unique()))
     slider.start = years[0]
     slider.end = years[-1]
+    
     if slider.value not in years:
         slider.value = years[1]
     
