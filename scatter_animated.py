@@ -206,7 +206,7 @@ def update_desc_box():
 def update_columns(attr, old, new):
     global plot_source,stats    
     p, plot_source,stats = make_plot()
-    chart_layout.children[0] = p
+    plot_layout.children[0] = p
     stats_box.text = update_stats_box(stats)
     desc_box.text = update_desc_box()
 
@@ -220,7 +220,7 @@ def update_year(attr, old, new):
     z_val = column_names[size_column.value]
     
     plot_source.data.update(make_data_dict(x_val,y_val,z_val,slider.value))
-    stats.data.update(make_stats_dict(chart_layout.children[0],plot_source.data))
+    stats.data.update(make_stats_dict(plot_layout.children[0],plot_source.data))
     stats_box.text = update_stats_box(stats)
     desc_box.text = update_desc_box()
 
@@ -255,7 +255,7 @@ def reset():
     region_column.active = range(len(regions))
     slider.value = years[0]
        
-def load_image(image_file,url, width_pixel, height_pixel):
+def load_image(image_file, width_pixel, height_pixel):
     #This function reads image files using Bokeh library and returns a figure object to be embedded in the layout object
     dk_img = PIL.Image.open(image_file)
     # width_pixel,height_pixel = 600, 70
@@ -264,7 +264,7 @@ def load_image(image_file,url, width_pixel, height_pixel):
     a = np.array(dk_img)
     dk_array = a.view(dtype=np.uint32).reshape(a.shape[:-1])
     dk_array = dk_array[::-1]
-    plot = figure(x_range=(1, width_pixel), y_range=(height_pixel,1 ), plot_height=height_pixel, plot_width= width_pixel)
+    plot = figure(x_range=(1, width_pixel), y_range=(height_pixel,1 ), plot_height=height_pixel, plot_width= width_pixel, tools="")
     plot.image_rgba(image=[dk_array], x=0, y=height_pixel, dw=width_pixel, dh=height_pixel)
     plot.toolbar.logo=None
     plot.toolbar_location=None
@@ -277,8 +277,8 @@ def load_image(image_file,url, width_pixel, height_pixel):
     plot.xgrid.grid_line_color = None
     plot.ygrid.grid_line_color = None
     plot.outline_line_alpha = None
-    taptool = p.select(type=TapTool)
-    taptool.callback = OpenURL(url=url)
+    # taptool = p.select(type=TapTool)
+    # taptool.callback = OpenURL(url=url)
     return plot
 
 ##Load Data
@@ -357,16 +357,19 @@ stats_box = Div(text = update_stats_box(stats))
 desc_box = Div(text = update_desc_box())
 
 #Create logo images
+logo = load_image('static/bd0712262e042a7b9859bdf1c9a2600f.png',1224,119)
 
-datakind_logo = load_image('static/png;base643d4f2e4c644d5b29.png','http://www.datakind.org/',600,70)
-freedomhouse_logo = load_image('static/FH_logo_blue_large_PNG.png','https://freedomhouse.org/',150,70)
+#Create url - "about this tool"
+div = Div(text="""                                                                                       """ + \
+	"""<a href="https://bokeh.pydata.org/en/latest/"><u><i>About this tool</i></u></a>""",width = 800, height = 10)
 
 #Add Plot and Widgets to document layout
 controls = widgetbox([x_column, y_column, size_column, 
                       region_column,slider,button,reset_button,download_button
                       ,stats_box,desc_box],width=430)
-logo_layout = row([datakind_logo,freedomhouse_logo])
-chart_layout = row([p,controls])
+logo_layout = row([logo])
+plot_layout = column([div,p])
+chart_layout = row([plot_layout,controls])
 lout = column(logo_layout,chart_layout)
 curdoc().add_root(lout)
 curdoc().title = "FH Scatterplot" 
@@ -374,5 +377,5 @@ curdoc().title = "FH Scatterplot"
 
 #Export script for embedding plot in other pages
 with open('scatter_animated_embed.html','w') as f:
-    script = autoload_server(url = "https://fh-vis.herokuapp.com/scatter_animated")
+    script = autoload_server("https://fh-vis.herokuapp.com/scatter_animated")
     f.write(script)
