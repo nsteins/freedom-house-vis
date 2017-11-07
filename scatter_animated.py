@@ -10,7 +10,7 @@ from bokeh.models.widgets import Select, CheckboxGroup,  Div
 from bokeh.models import Button, Slider, HoverTool, ColumnDataSource, CustomJS, OpenURL, TapTool
 from bokeh.layouts import row,column,widgetbox
 from bokeh.palettes import Dark2
-from bokeh.embed import autoload_server
+from bokeh.embed import server_document
 
 
 def make_data_dict(x_val,y_val,z_val,year):
@@ -206,7 +206,7 @@ def update_desc_box():
 def update_columns(attr, old, new):
     global plot_source,stats    
     p, plot_source,stats = make_plot()
-    plot_layout.children[0] = p
+    plot_layout.children[1] = p
     stats_box.text = update_stats_box(stats)
     desc_box.text = update_desc_box()
 
@@ -220,7 +220,7 @@ def update_year(attr, old, new):
     z_val = column_names[size_column.value]
     
     plot_source.data.update(make_data_dict(x_val,y_val,z_val,slider.value))
-    stats.data.update(make_stats_dict(plot_layout.children[0],plot_source.data))
+    stats.data.update(make_stats_dict(plot_layout.children[1],plot_source.data))
     stats_box.text = update_stats_box(stats)
     desc_box.text = update_desc_box()
 
@@ -377,5 +377,5 @@ curdoc().title = "FH Scatterplot"
 
 #Export script for embedding plot in other pages
 with open('scatter_animated_embed.html','w') as f:
-    script = autoload_server("https://fh-vis.herokuapp.com/scatter_animated")
+    script = server_document(url="https://fh-vis.herokuapp.com/scatter_animated")
     f.write(script)
