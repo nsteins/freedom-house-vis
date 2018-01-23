@@ -1,71 +1,73 @@
-,FullNames,Descriptors,Data Source,Link,Score Description
-0,Country,Country,,,
-1,Status,FH - Level of Freedom,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-2,PR.Rating,FH - Political Rights Rating,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-3,CL.Rating,FH - Civil Liberties Rating,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-4,A.Aggr,FH - Electoral Process,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-5,B.Aggr,FH - Political Pluralism and Participation,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-6,C.Aggr,FH - Functioning of Government,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-7,PR.Aggr,FH - Political Rights Aggregated Score,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-8,D.Aggr,FH - Freedom of Expression and Belief,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-9,E.Aggr,FH - Associational and Organizational Rights,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-10,F.Aggr,FH - Rule of Law,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-11,G.Aggr,FH - Personal Autonomy and Individual Rights,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-12,CL.Aggr,FH - Civil Liberties Aggregated Score,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-13,Total.Aggr,FH - Total Aggregated Score,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better"
-14,Year,Year,,,
-15,Region,Region,,,
-16,FSI_Total,FSI Total Score,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-120, lower is better"
-17,FSI_Demographic.Pressures,FSI - Demographic Pressures,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-18,FSI_Refugees.and.IDPs,FSI - Refugees and IDPs,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-19,FSI_Group.Grievance,FSI - Group Grievance,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-20,FSI_Human.Flight,FSI - Human Flight,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-21,FSI_Uneven.Development,FSI - Uneven Economic Development,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-22,FSI_Poverty.and.Economic.Decline,FSI - Poverty and Economic Decline,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-23,FSI_Legitimacy.of.the.State,FSI - State Legitimacy,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-24,FSI_Public.Services,FSI - Public Services,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-25,FSI_Human.Rights,FSI - Human Rights,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-26,FSI_Security.Apparatus,FSI - Security Apparatus,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-27,FSI_Factionalized.Elites,FSI - Factionalized Elites,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better"
-28,PTS_A,Political Terror Index - Amnesty International,Political Terror Index,http://www.politicalterrorscale.org/Data/,"Score from 1-5, lower is better"
-29,PTS_H,Political Terror Index - Human Rights Watch,Political Terror Index,http://www.politicalterrorscale.org/Data/,"Score from 1-5, lower is better"
-30,PTS_S,Political Terror Index - US State Department,Political Terror Index,http://www.politicalterrorscale.org/Data/,"Score from 1-5, lower is better"
-31,UN_hdi,UN HDI - Human Development Index,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-32,UN_gdi,UN HDI - Gender Development Index,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-33,UN_gii,UN HDI - Gender Inequality Index,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-34,UN_iie,UN HDI - Inequality in Education,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-35,UN_iii,UN HDI - Inequality in Income,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-36,UN_iile,UN HDI - Inequality in Life Expectancy,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-37,UN_imr,"UN HDI - Infant Mortality Rate per 1,000 live births",UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-38,UN_ynis,UN HDI - Youth Not in School or Employed,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-39,UN_yu,UN HDI - Youth Unemployment Rate,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.)
-40,Ease.of.doing.business.index..1.most.business.friendly.regulations.,WB - Ease of doing business index ,The World Bank,http://data.worldbank.org/,Lower is better
-41,Fuel.exports....of.merchandise.exports.,WB - Fuel exports,The World Bank,http://data.worldbank.org/,% of Merchandise Exports
-42,GDP.at.market.prices..constant.2010.US..,WB - GDP at market prices,The World Bank,http://data.worldbank.org/,Constant 2010 US$
-43,GDP.growth..annual...,WB - GDP growth,The World Bank,http://data.worldbank.org/,"Annual, percentage"
-44,GDP.per.capita..constant.2010.US..,WB - GDP per capita,The World Bank,http://data.worldbank.org/,Constant 2010 US$
-45,GDP..PPP..constant.2011.international...,"WB - GDP, PPP",The World Bank,http://data.worldbank.org/,Constant 2011 international $
-46,Income.share.held.by.fourth.20.,WB - Income share held by fourth 20%,The World Bank,http://data.worldbank.org/,%
-47,Income.share.held.by.highest.10.,WB - Income share held by highest 10%,The World Bank,http://data.worldbank.org/,%
-48,Income.share.held.by.highest.20.,WB - Income share held by highest 20%,The World Bank,http://data.worldbank.org/,%
-49,Income.share.held.by.lowest.10.,WB - Income share held by lowest 10%,The World Bank,http://data.worldbank.org/,%
-50,Income.share.held.by.lowest.20.,WB - Income share held by lowest 20%,The World Bank,http://data.worldbank.org/,%
-51,Income.share.held.by.second.20.,WB - Income share held by second 20%,The World Bank,http://data.worldbank.org/,%
-52,Income.share.held.by.third.20.,WB - Income share held by third 20%,The World Bank,http://data.worldbank.org/,%
-55,Labor.force.participation.rate.for.ages.15.24..total......national.estimate.,WB - Labor force participation rate for ages 15-24,The World Bank,http://data.worldbank.org/,"%, national estimate"
-56,Labor.force.participation.rate..total....of.total.population.ages.15....national.estimate.,WB - Labor force participation rate,The World Bank,http://data.worldbank.org/,"Total % of population over 15 years old, national estimate"
-57,Labor.force..female....of.total.labor.force.,"WB - Labor force, female",The World Bank,http://data.worldbank.org/,% of total
-58,Labor.force..total,WB - Labor force,The World Bank,http://data.worldbank.org/,Total
-59,Life.expectancy.at.birth..total..years.,WB - Life expectancy at birth,The World Bank,http://data.worldbank.org/,Total (years)
-60,Lifetime.risk.of.maternal.death....,WB - Lifetime risk of maternal death,The World Bank,http://data.worldbank.org/,%
-61,Literacy.rate..adult.female....of.females.ages.15.and.above.,"WB - Literacy rate, adult female",The World Bank,http://data.worldbank.org/,%
-62,Literacy.rate..adult.male....of.males.ages.15.and.above.,"WB - Literacy rate, adult male",The World Bank,http://data.worldbank.org/,%
-63,Military.expenditure....of.GDP.,WB - Military expenditure,The World Bank,http://data.worldbank.org/,% of GDP
-64,Mineral.rents....of.GDP.,WB - Mineral rents,The World Bank,http://data.worldbank.org/,% of GDP
-65,Mobile.cellular.subscriptions..per.100.people.,WB - Mobile cellular subscriptions,The World Bank,http://data.worldbank.org/,per 100 people
-66,Mortality.rate..under.5..per.1.000.live.births.,"WB - Mortality rate, under-5",The World Bank,http://data.worldbank.org/,per 1000 live births
-67,Net.bilateral.aid.flows.from.DAC.donors..Total..current.US..,WB - Net bilateral aid flows from DAC donors,The World Bank,http://data.worldbank.org/,"Total, current US$"
-68,Population.density..people.per.sq..km.of.land.area.,WB - Population density,The World Bank,http://data.worldbank.org/,people per sq.km of land area
-69,Population.growth..annual...,WB - Population growth,The World Bank,http://data.worldbank.org/,annual %
-70,Population..total,WB - Population,The World Bank,http://data.worldbank.org/,Total
-71,Rural.population....of.total.population.,WB - Rural population,The World Bank,http://data.worldbank.org/,% of total population
+,FullNames,Descriptors,Data Source,Link,Score Description,,,,,,,,,,,,,,,,,,,,,
+0,Country,Country,,,,,,,,,,,,,,,,,,,,,,,,
+1,Status,FH - Level of Freedom,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better",,,,,,,,,,,,,,,,,,,,,
+2,PR.Rating,FH - Political Rights Rating,Freedom House,https://freedomhouse.org/,"Score from 0-7, higher is better",,,,,,,,,,,,,,,,,,,,,
+3,CL.Rating,FH - Civil Liberties Rating,Freedom House,https://freedomhouse.org/,"Score from 0-7, higher is better",,,,,,,,,,,,,,,,,,,,,
+4,A.Aggr,FH - Electoral Process,Freedom House,https://freedomhouse.org/,"Score from 0-12, higher is better",,,,,,,,,,,,,,,,,,,,,
+5,B.Aggr,FH - Political Pluralism and Participation,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better",,,,,,,,,,,,,,,,,,,,,
+6,C.Aggr,FH - Functioning of Government,Freedom House,https://freedomhouse.org/,"Score from 0-12, higher is better",,,,,,,,,,,,,,,,,,,,,
+7,PR.Aggr,FH - Political Rights Aggregated Score,Freedom House,https://freedomhouse.org/,Score from 0-40 higher is better,,,,,,,,,,,,,,,,,,,,,
+8,D.Aggr,FH - Freedom of Expression and Belief,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better",,,,,,,,,,,,,,,,,,,,,
+9,E.Aggr,FH - Associational and Organizational Rights,Freedom House,https://freedomhouse.org/,"Score from 0-12, higher is better",,,,,,,,,,,,,,,,,,,,,
+10,F.Aggr,FH - Rule of Law,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better",,,,,,,,,,,,,,,,,,,,,
+11,G.Aggr,FH - Personal Autonomy and Individual Rights,Freedom House,https://freedomhouse.org/,"Score from 0-16, higher is better",,,,,,,,,,,,,,,,,,,,,
+12,CL.Aggr,FH - Civil Liberties Aggregated Score,Freedom House,https://freedomhouse.org/,"Score from 0-60, higher is better",,,,,,,,,,,,,,,,,,,,,
+13,Total.Aggr,FH - Total Aggregated Score,Freedom House,https://freedomhouse.org/,"Score from 0-100, higher is better",,,,,,,,,,,,,,,,,,,,,
+14,Year,Year,,,,,,,,,,,,,,,,,,,,,,,,
+15,Region,Region,,,,,,,,,,,,,,,,,,,,,,,,
+16,FSI_Total,FSI Total Score,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-120, lower is better",,,,,,,,,,,,,,,,,,,,,
+17,FSI_Demographic.Pressures,FSI - Demographic Pressures,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+18,FSI_Refugees.and.IDPs,FSI - Refugees and IDPs,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+19,FSI_Group.Grievance,FSI - Group Grievance,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+20,FSI_Human.Flight,FSI - Human Flight,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+21,FSI_Uneven.Development,FSI - Uneven Economic Development,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+22,FSI_Poverty.and.Economic.Decline,FSI - Poverty and Economic Decline,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+23,FSI_Legitimacy.of.the.State,FSI - State Legitimacy,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+24,FSI_Public.Services,FSI - Public Services,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+25,FSI_Human.Rights,FSI - Human Rights,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+26,FSI_Security.Apparatus,FSI - Security Apparatus,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+27,FSI_Factionalized.Elites,FSI - Factionalized Elites,Fragile State Index,http://fundforpeace.org/fsi/,"Score from 0-10, lower is better",,,,,,,,,,,,,,,,,,,,,
+28,PTS_A,Political Terror Index - Amnesty International,Political Terror Index,http://www.politicalterrorscale.org/Data/,"Score from 1-5, lower is better",,,,,,,,,,,,,,,,,,,,,
+29,PTS_H,Political Terror Index - Human Rights Watch,Political Terror Index,http://www.politicalterrorscale.org/Data/,"Score from 1-5, lower is better",,,,,,,,,,,,,,,,,,,,,
+30,PTS_S,Political Terror Index - US State Department,Political Terror Index,http://www.politicalterrorscale.org/Data/,"Score from 1-5, lower is better",,,,,,,,,,,,,,,,,,,,,
+31,UN_hdi,UN HDI - Human Development Index,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+32,UN_gdi,UN HDI - Gender Development Index,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+33,UN_gii,UN HDI - Gender Inequality Index,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+34,UN_iie,UN HDI - Inequality in Education,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+35,UN_iii,UN HDI - Inequality in Income,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+36,UN_iile,UN HDI - Inequality in Life Expectancy,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+37,UN_imr,"UN HDI - Infant Mortality Rate per 1,000 live births",UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+38,UN_ynis,UN HDI - Youth Not in School or Employed,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+39,UN_yu,UN HDI - Youth Unemployment Rate,UN Human Development Index,http://hdr.undp.org/en/content/human-development-index-hdi,The details of the calculations for the different UNHDIs can be found at the following page: http://dev-hdr.pantheonsite.io/sites/default/files/hdr2016_technical_notes_0.pdf . (Please note that some countries use estimates.),,,,,,,,,,,,,,,,,,,,,
+40,Ease.of.doing.business.index..1.most.business.friendly.regulations.,WB - Ease of doing business index ,The World Bank,http://data.worldbank.org/,Lower is better,,,,,,,,,,,,,,,,,,,,,
+41,Fuel.exports....of.merchandise.exports.,WB - Fuel exports,The World Bank,http://data.worldbank.org/,% of Merchandise Exports,,,,,,,,,,,,,,,,,,,,,
+42,GDP.at.market.prices..constant.2010.US..,WB - GDP at market prices,The World Bank,http://data.worldbank.org/,Constant 2010 US$,,,,,,,,,,,,,,,,,,,,,
+43,GDP.growth..annual...,WB - GDP growth,The World Bank,http://data.worldbank.org/,"Annual, percentage",,,,,,,,,,,,,,,,,,,,,
+44,GDP.per.capita..constant.2010.US..,WB - GDP per capita,The World Bank,http://data.worldbank.org/,Constant 2010 US$,,,,,,,,,,,,,,,,,,,,,
+45,GDP..PPP..constant.2011.international...,"WB - GDP, PPP",The World Bank,http://data.worldbank.org/,Constant 2011 international $,,,,,,,,,,,,,,,,,,,,,
+46,Income.share.held.by.fourth.20.,WB - Income share held by fourth 20%,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+47,Income.share.held.by.highest.10.,WB - Income share held by highest 10%,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+48,Income.share.held.by.highest.20.,WB - Income share held by highest 20%,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+49,Income.share.held.by.lowest.10.,WB - Income share held by lowest 10%,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+50,Income.share.held.by.lowest.20.,WB - Income share held by lowest 20%,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+51,Income.share.held.by.second.20.,WB - Income share held by second 20%,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+52,Income.share.held.by.third.20.,WB - Income share held by third 20%,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+53,Internally.displaced.persons..number..high.estimate.,"WB - Internally displaced persons (number, high estimate)",The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+54,Internally.displaced.persons..number..low.estimate.,"WB - Internally displaced persons (number, low estimate)",The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+55,Labor.force.participation.rate.for.ages.15.24..total......national.estimate.,WB - Labor force participation rate for ages 15-24,The World Bank,http://data.worldbank.org/,"%, national estimate",,,,,,,,,,,,,,,,,,,,,
+56,Labor.force.participation.rate..total....of.total.population.ages.15....national.estimate.,WB - Labor force participation rate,The World Bank,http://data.worldbank.org/,"Total % of population over 15 years old, national estimate",,,,,,,,,,,,,,,,,,,,,
+57,Labor.force..female....of.total.labor.force.,"WB - Labor force, female",The World Bank,http://data.worldbank.org/,% of total,,,,,,,,,,,,,,,,,,,,,
+58,Labor.force..total,WB - Labor force,The World Bank,http://data.worldbank.org/,Total,,,,,,,,,,,,,,,,,,,,,
+59,Life.expectancy.at.birth..total..years.,WB - Life expectancy at birth,The World Bank,http://data.worldbank.org/,Total (years),,,,,,,,,,,,,,,,,,,,,
+60,Lifetime.risk.of.maternal.death....,WB - Lifetime risk of maternal death,The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+61,Literacy.rate..adult.female....of.females.ages.15.and.above.,"WB - Literacy rate, adult female",The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+62,Literacy.rate..adult.male....of.males.ages.15.and.above.,"WB - Literacy rate, adult male",The World Bank,http://data.worldbank.org/,%,,,,,,,,,,,,,,,,,,,,,
+63,Military.expenditure....of.GDP.,WB - Military expenditure,The World Bank,http://data.worldbank.org/,% of GDP,,,,,,,,,,,,,,,,,,,,,
+64,Mineral.rents....of.GDP.,WB - Mineral rents,The World Bank,http://data.worldbank.org/,% of GDP,,,,,,,,,,,,,,,,,,,,,
+65,Mobile.cellular.subscriptions..per.100.people.,WB - Mobile cellular subscriptions,The World Bank,http://data.worldbank.org/,per 100 people,,,,,,,,,,,,,,,,,,,,,
+66,Mortality.rate..under.5..per.1.000.live.births.,"WB - Mortality rate, under-5",The World Bank,http://data.worldbank.org/,per 1000 live births,,,,,,,,,,,,,,,,,,,,,
+67,Net.bilateral.aid.flows.from.DAC.donors..Total..current.US..,WB - Net bilateral aid flows from DAC donors,The World Bank,http://data.worldbank.org/,"Total, current US$",,,,,,,,,,,,,,,,,,,,,
+68,Population.density..people.per.sq..km.of.land.area.,WB - Population density,The World Bank,http://data.worldbank.org/,people per sq.km of land area,,,,,,,,,,,,,,,,,,,,,
+69,Population.growth..annual...,WB - Population growth,The World Bank,http://data.worldbank.org/,annual %,,,,,,,,,,,,,,,,,,,,,
+70,Population..total,WB - Population,The World Bank,http://data.worldbank.org/,Total,,,,,,,,,,,,,,,,,,,,,
+71,Rural.population....of.total.population.,WB - Rural population,The World Bank,http://data.worldbank.org/,% of total population,,,,,,,,,,,,,,,,,,,,,

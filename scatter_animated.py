@@ -357,11 +357,11 @@ stats_box = Div(text = update_stats_box(stats))
 desc_box = Div(text = update_desc_box())
 
 #Create logo images
-logo = load_image('static/bd0712262e042a7b9859bdf1c9a2600f.png',1224,119)
+logo = load_image('static/Datakinda-Banner.png',1224,119)
 
 #Create url - "about this tool"
 div = Div(text="""                                                                                       """ + \
-	"""<a href="https://bokeh.pydata.org/en/latest/"><u><i>About this tool</i></u></a>""",width = 800, height = 10)
+	"""<a href="https://docs.google.com/document/d/1Z2MZDObaYwlFy86DSqBlsCAKspy9_DfxBybbKTU180A/edit"><u><i>About this tool</i></u></a>""",width = 800, height = 10)
 
 #Add Plot and Widgets to document layout
 controls = widgetbox([x_column, y_column, size_column, 
